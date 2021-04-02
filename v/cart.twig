@@ -1,0 +1,66 @@
+
+<div class="content_wrp">
+    <div class="cart">
+        <h2 class="cart_title page_title">Корзина</h2>
+
+        {% if goods %}   
+            <div class="cart_table">
+                <div class="cart_table_title">
+                    <div class="cart_table_title_img">Фото</div>
+                    <div class="cart_table_title_name">Наименование товара</div>
+                    <div class="cart_table_title_quantity">Количество</div>
+                    <div class="cart_table_title_price">Цена</div>
+                    <div class="cart_table_title_sum">Сумма</div>
+                    <div class="cart_table_title_btn"></div>
+                </div>
+
+                {% for good in goods %}
+
+                    <div class="cart_table_item">
+                        <div class="cart_table_item_img_wrp">
+                            <a class="cart_table_item_link" href="index.php?class=page&method=good&id={{ good.id }}">
+                                <img class="cart_table_item_img" src="assets/img/catalog/{{ good.img }}">
+                            </a>
+                        </div>
+                        <div class="cart_table_item_info_wrp">
+                            <div class="cart_table_item_info">
+                                <p class="cart_table_item_category">{{ good.category }} &nbsp;{{ good.brand }} &nbsp;{{ good.model }}</p>
+                                <p class="cart_table_item_size">Размер: &nbsp;{{ good.size }}</p>
+                                <p class="cart_table_item_articul">Артикул: &nbsp;{{ good.id }}</p>
+                            </div>
+                        </div>
+                        <div class="cart_table_item_quantity"><p class="mobile_cart_item_title">Количество:</p> &nbsp;{{ good.quantity }}</div>
+                        <div class="cart_table_item_price"><p class="mobile_cart_item_title">Цена:</p> &nbsp;{{ good.price }} руб.</div>
+                        <div class="cart_table_item_sum"><p class="mobile_cart_item_title">Сумма:</p> &nbsp;{{ good.sum }} руб.</div>
+                        <div class="cart_table_item_btn_wrp">
+                            <a class="cart_table_item_delete_link" href="index.php?class=cart&method=cart" onclick="deleteGood({{ good.key }})">Удалить</a>
+                        </div>
+                    </div>                                                 
+                    
+                {% endfor %}
+
+                </div>
+
+            <div class="cart_sum">
+                <p>ИТОГО: &nbsp; {{ cartSum }} руб.</p>
+            </div>
+
+            <div class="cart_btns">
+                <a class="cart_catalog_link" href="index.php?class=page&method=catalog">Продолжить покупки</a>
+                <a class="cart_clear_btn" href="index.php?class=cart&method=clear">Очистить корзину</a>
+                {% if user == true %}
+                    <a id="save_order" class="cart_order_link">Оформить заказ</a>
+                {% endif %}
+                {% if user == false %}
+                    <p class="cart_login">Для заказа необходимо 
+                        <a class="cart_login_link" href="index.php?class=user&method=login" style="color:red;">авторизоваться</a> 
+                    </p>
+                {% endif %}
+            </div>
+
+        {% else %}
+            <p class="empty_catalog_message">В корзине нет товаров</p>
+        {% endif %}
+
+    </div>
+</div>
